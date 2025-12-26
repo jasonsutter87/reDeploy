@@ -11,6 +11,25 @@ const {
   DeploymentError,
 } = require('./deployment-trigger');
 const { getRepoConfigs } = require('./repo-management');
+const { logDeployment, DeploymentStatus } = require('./deployment-history');
+
+/**
+ * Log deployment results to history
+ */
+function logDeploymentResults(userId, results) {
+  for (const result of results) {
+    for (const branch of result.branches) {
+      logDeployment(userId, {
+        repo: result.repo,
+        branch: branch.branch,
+        status: branch.status === 'success' ? DeploymentStatus.SUCCESS : DeploymentStatus.FAILED,
+        sha: branch.sha || null,
+        commitMessage: branch.message || null,
+        errorMessage: branch.error || null,
+      });
+    }
+  }
+}
 
 /**
  * Extract GitHub token from request
@@ -107,6 +126,9 @@ exports.handler = async (event, _context) => {
 
       const result = await triggerBatchDeployment(token, repoList);
 
+      // Log to history
+      logDeploymentResults(userId, result.results);
+
       return {
         statusCode: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -134,6 +156,9 @@ exports.handler = async (event, _context) => {
 
       const result = await triggerBatchDeployment(token, repoList);
 
+      // Log to history
+      logDeploymentResults(userId, result.results);
+
       return {
         statusCode: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -152,6 +177,9 @@ exports.handler = async (event, _context) => {
 
       const result = await triggerBatchDeployment(token, repoList);
 
+      // Log to history
+      logDeploymentResults(userId, result.results);
+
       return {
         statusCode: 200,
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -167,6 +195,9 @@ exports.handler = async (event, _context) => {
         branches: body.branches || ['main'],
         message,
       });
+
+      // Log to history
+      logDeploymentResults(userId, [result]);
 
       return {
         statusCode: 200,

@@ -69,3 +69,13 @@
   to = "/.netlify/functions/deploy"
   status = 200
 
+[[redirects]]
+  from = "/api/history"
+  to = "/.netlify/functions/history"
+  status = 200
+
+[[redirects]]
+  from = "/api/history/*"
+  to = "/.netlify/functions/history/:splat"
+  status = 200
+

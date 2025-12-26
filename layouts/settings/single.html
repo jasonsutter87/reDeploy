@@ -1,0 +1,224 @@
+{{ define "main" }}
+<div class="container py-5">
+  <div class="row">
+    {{/* Settings Navigation */}}
+    <div class="col-lg-3 mb-4">
+      <div class="card">
+        <div class="card-body p-0">
+          <nav class="nav flex-column">
+            <a class="nav-link active" href="#account" data-section="account">
+              <svg class="w-5 h-5 d-inline-block me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+              Account
+            </a>
+            <a class="nav-link" href="#preferences" data-section="preferences">
+              <svg class="w-5 h-5 d-inline-block me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              Preferences
+            </a>
+            <a class="nav-link" href="#danger" data-section="danger">
+              <svg class="w-5 h-5 d-inline-block me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+              Danger Zone
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    {{/* Settings Content */}}
+    <div class="col-lg-9">
+      {{/* Account Section */}}
+      <section id="account" class="settings-section">
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h2 class="fw-semibold text-dark mb-0">Account</h2>
+          </div>
+          <div class="card-body">
+            {{/* Connected Accounts */}}
+            <h3 class="fw-semibold mb-3">Connected Accounts</h3>
+
+            <div class="mb-4 p-3 border rounded d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <svg class="w-8 h-8 me-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                <div>
+                  <strong>GitHub</strong>
+                  <p class="text-muted mb-0 small" id="github-status">Not connected</p>
+                </div>
+              </div>
+              <button id="github-connect" class="btn btn-outline-primary">Connect</button>
+            </div>
+
+            <div class="p-3 border rounded d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <svg class="w-8 h-8 me-3" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                <div>
+                  <strong>Google</strong>
+                  <p class="text-muted mb-0 small" id="google-status">Not connected</p>
+                </div>
+              </div>
+              <button id="google-connect" class="btn btn-outline-primary">Connect</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {{/* Preferences Section */}}
+      <section id="preferences" class="settings-section">
+        <div class="card mb-4">
+          <div class="card-header bg-white">
+            <h2 class="fw-semibold text-dark mb-0">Preferences</h2>
+          </div>
+          <div class="card-body">
+            {{/* Default Branch */}}
+            <div class="mb-4">
+              <label for="default-branch" class="form-label fw-semibold">Default Branch</label>
+              <select id="default-branch" class="form-select">
+                <option value="main">main</option>
+                <option value="master">master</option>
+                <option value="develop">develop</option>
+              </select>
+              <small class="text-muted">Branch used when adding new repositories</small>
+            </div>
+
+            {{/* Commit Message Template */}}
+            <div class="mb-4">
+              <label for="commit-message" class="form-label fw-semibold">Commit Message Template</label>
+              <input type="text" id="commit-message" class="form-control" value="chore: trigger rebuild [{timestamp}]">
+              <small class="text-muted">
+                Available placeholders: <code>{timestamp}</code>, <code>{repo}</code>, <code>{branch}</code>
+              </small>
+            </div>
+
+            {{/* Notifications */}}
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Notifications</label>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="notify-success" checked>
+                <label class="form-check-label" for="notify-success">
+                  Show notifications for successful deployments
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="notify-failure" checked>
+                <label class="form-check-label" for="notify-failure">
+                  Show notifications for failed deployments
+                </label>
+              </div>
+            </div>
+
+            <button id="save-preferences" class="btn-primary px-4 py-2 rounded text-white">
+              Save Preferences
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {{/* Danger Zone Section */}}
+      <section id="danger" class="settings-section">
+        <div class="card border-danger">
+          <div class="card-header bg-danger text-white">
+            <h2 class="fw-semibold mb-0">Danger Zone</h2>
+          </div>
+          <div class="card-body">
+            {{/* Clear History */}}
+            <div class="mb-4 p-3 border border-warning rounded">
+              <h3 class="fw-semibold mb-2">Clear Deployment History</h3>
+              <p class="text-muted mb-3">This will permanently delete all your deployment history. This action cannot be undone.</p>
+              <button id="clear-history" class="btn btn-outline-warning">Clear History</button>
+            </div>
+
+            {{/* Delete Account */}}
+            <div class="p-3 border border-danger rounded">
+              <h3 class="fw-semibold mb-2">Delete Account</h3>
+              <p class="text-muted mb-3">Permanently delete your account and all associated data. This action cannot be undone.</p>
+              <button id="delete-account" class="btn btn-danger">Delete Account</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // Load preferences from localStorage
+  function loadPreferences() {
+    const prefs = JSON.parse(localStorage.getItem('redeploy_prefs') || '{}');
+
+    if (prefs.defaultBranch) {
+      document.getElementById('default-branch').value = prefs.defaultBranch;
+    }
+    if (prefs.commitMessage) {
+      document.getElementById('commit-message').value = prefs.commitMessage;
+    }
+    if (prefs.notifySuccess !== undefined) {
+      document.getElementById('notify-success').checked = prefs.notifySuccess;
+    }
+    if (prefs.notifyFailure !== undefined) {
+      document.getElementById('notify-failure').checked = prefs.notifyFailure;
+    }
+  }
+
+  // Save preferences to localStorage
+  function savePreferences() {
+    const prefs = {
+      defaultBranch: document.getElementById('default-branch').value,
+      commitMessage: document.getElementById('commit-message').value,
+      notifySuccess: document.getElementById('notify-success').checked,
+      notifyFailure: document.getElementById('notify-failure').checked,
+    };
+
+    localStorage.setItem('redeploy_prefs', JSON.stringify(prefs));
+    alert('Preferences saved!');
+  }
+
+  // Section navigation
+  document.querySelectorAll('[data-section]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const section = e.currentTarget.dataset.section;
+
+      // Update active link
+      document.querySelectorAll('[data-section]').forEach(l => l.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+
+      // Scroll to section
+      document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Save preferences
+  document.getElementById('save-preferences').addEventListener('click', savePreferences);
+
+  // Clear history
+  document.getElementById('clear-history').addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear all deployment history? This cannot be undone.')) {
+      // TODO: Call API to clear history
+      alert('History cleared');
+    }
+  });
+
+  // Delete account
+  document.getElementById('delete-account').addEventListener('click', () => {
+    if (confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+      if (confirm('This is your last chance. All data will be permanently deleted. Continue?')) {
+        // TODO: Call API to delete account
+        alert('Account deletion requested');
+      }
+    }
+  });
+
+  // GitHub connect
+  document.getElementById('github-connect').addEventListener('click', () => {
+    window.location.href = '/auth/github';
+  });
+
+  // Google connect
+  document.getElementById('google-connect').addEventListener('click', () => {
+    window.location.href = '/auth/google';
+  });
+
+  // Initialize
+  loadPreferences();
+})();
+</script>
+{{ end }}
