@@ -1,0 +1,15 @@
+baseURL = 'https://redeploy.app/'
+languageCode = 'en-us'
+title = 'reDeploy - One-Click Multi-Repo Deployments'
+
+[params]
+CompanyName = 'reDeploy'
+repoName = 'reDeploy'
+description = 'Trigger deployments across all your repos with a single click'
+
+[environments.development]
+baseURL = 'http://localhost:1313/'
+
+[environments.production]
+baseURL = 'https://redeploy.app/'
+
