@@ -1,9 +1,9 @@
-{{/* Accessible footer with proper contrast */}}
+{{/* Accessible footer with proper contrast and heading hierarchy */}}
 <div class="container py-5">
   <div class="row">
     {{/* Company info */}}
     <div class="col-12 col-md-4 mb-4 mb-md-0">
-      <h4 class="fw-bold mb-3">{{ .Site.Params.companyName | default "reDeploy" }}</h4>
+      <h2 class="h5 fw-bold mb-3">{{ .Site.Params.companyName | default "reDeploy" }}</h2>
       <p class="text-gray-300 mb-0">
         One-click deployment trigger for all your GitHub repositories.
       </p>
@@ -11,7 +11,7 @@
 
     {{/* Quick Links */}}
     <div class="col-12 col-md-4 mb-4 mb-md-0">
-      <h5 class="fw-bold mb-3">Quick Links</h5>
+      <h2 class="h6 fw-bold mb-3">Quick Links</h2>
       <ul class="list-unstyled mb-0">
         <li class="mb-2">
           <a href="/signup" class="text-gray-300 text-decoration-none hover:text-white">Get Started</a>
@@ -27,7 +27,7 @@
 
     {{/* Legal Links */}}
     <div class="col-12 col-md-4">
-      <h5 class="fw-bold mb-3">Legal</h5>
+      <h2 class="h6 fw-bold mb-3">Legal</h2>
       <ul class="list-unstyled mb-0">
         <li class="mb-2">
           <a href="/privacy-policy" class="text-gray-300 text-decoration-none hover:text-white">Privacy Policy</a>
