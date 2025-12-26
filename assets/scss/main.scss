@@ -258,12 +258,22 @@
 // Add your project-specific styles below using full SCSS power!
 // ==========================================================================
 
-// Example: Custom component with nesting
+// Transition utilities
+.transition-colors {
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.transition-all {
+  transition: all 150ms ease;
+}
+
+// Hero section for landing page
 .hero {
   @include flex-center;
-  min-height: 60vh;
+  min-height: 70vh;
   background: linear-gradient(135deg, $primary 0%, darken($primary, 15%) 100%);
   color: white;
+  padding: 3rem 0;
 
   &__title {
     @include heading(2.5rem);
@@ -274,16 +284,45 @@
     }
 
     @include lg {
-      font-size: 4.5rem;
+      font-size: 4rem;
     }
   }
 
   &__subtitle {
     font-size: 1.125rem;
     opacity: 0.9;
+    line-height: 1.6;
 
     @include md {
       font-size: 1.25rem;
     }
   }
+}
+
+// Feature card hover effects
+.feature-card {
+  transition: transform 200ms ease, box-shadow 200ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Step cards in "How it works" section
+.step-card {
+  transition: transform 200ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+// Max width utilities for text content
+.max-w-2xl {
+  max-width: 42rem;
+}
+
+.max-w-3xl {
+  max-width: 48rem;
 }
