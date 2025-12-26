@@ -41,7 +41,11 @@ function validateRepoConfig(config) {
     throw new RepoConfigError('fullName is required', 'MISSING_FULL_NAME');
   }
 
-  if (!config.selectedBranches || !Array.isArray(config.selectedBranches) || config.selectedBranches.length === 0) {
+  if (
+    !config.selectedBranches ||
+    !Array.isArray(config.selectedBranches) ||
+    config.selectedBranches.length === 0
+  ) {
     throw new RepoConfigError('selectedBranches must be a non-empty array', 'INVALID_BRANCHES');
   }
 }

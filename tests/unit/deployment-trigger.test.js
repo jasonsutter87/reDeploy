@@ -249,11 +249,14 @@ describe('Deployment Trigger', () => {
     it('should handle mixed success/failure in batch', async () => {
       // Track which repo is being accessed
       let callCount = 0;
-      fetch.mockImplementation(async (url) => {
+      fetch.mockImplementation(async (_url) => {
         callCount++;
         // First 4 calls are for repo1 (success), next calls are for repo2 (fail)
         if (callCount <= 4) {
-          return { ok: true, json: async () => ({ object: { sha: 'abc1' }, sha: 'abc1', tree: { sha: 'tree1' } }) };
+          return {
+            ok: true,
+            json: async () => ({ object: { sha: 'abc1' }, sha: 'abc1', tree: { sha: 'tree1' } }),
+          };
         }
         return { ok: false, status: 404, json: async () => ({ message: 'Not found' }) };
       });

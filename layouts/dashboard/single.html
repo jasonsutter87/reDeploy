@@ -1,0 +1,535 @@
+{{ define "main" }}
+<div class="container py-5">
+  {{/* Dashboard Header */}}
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h1 class="text-3xl fw-bold text-dark mb-1">Dashboard</h1>
+      <p class="text-muted mb-0">Manage your repositories and trigger deployments</p>
+    </div>
+    <div class="d-flex gap-2">
+      <button id="refresh-repos" class="btn btn-outline-secondary" title="Refresh repository list">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+        </svg>
+        <span class="ms-1">Refresh</span>
+      </button>
+      <button id="deploy-all-btn" class="btn-primary px-4 py-2 rounded text-white fw-semibold" disabled>
+        <svg class="w-5 h-5 d-inline-block me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+        </svg>
+        Deploy All
+      </button>
+    </div>
+  </div>
+
+  {{/* Status Bar */}}
+  <div id="status-bar" class="alert d-none mb-4" role="alert">
+    <span id="status-message"></span>
+  </div>
+
+  {{/* Deployment Progress */}}
+  <div id="deployment-progress" class="card mb-4 d-none">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3 class="fw-semibold text-dark mb-0">Deployment Progress</h3>
+        <button id="close-progress" class="btn btn-sm btn-outline-secondary">Close</button>
+      </div>
+      <div class="progress mb-3" style="height: 8px;">
+        <div id="progress-bar" class="progress-bar bg-primary" role="progressbar" style="width: 0%"></div>
+      </div>
+      <div id="progress-details" class="small"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    {{/* Repository List */}}
+    <div class="col-lg-8 mb-4 mb-lg-0">
+      <div class="card">
+        <div class="card-header bg-white border-bottom">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="fw-semibold text-dark mb-0">Your Repositories</h2>
+            <button id="add-repo-btn" class="btn btn-sm btn-outline-primary">
+              <svg class="w-4 h-4 d-inline-block me-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+              </svg>
+              Add Repository
+            </button>
+          </div>
+          {{/* Search */}}
+          <div class="mt-3">
+            <input type="text" id="repo-search" class="form-control" placeholder="Search repositories..." aria-label="Search repositories">
+          </div>
+        </div>
+        <div class="card-body p-0">
+          {{/* Loading State */}}
+          <div id="repos-loading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="text-muted mt-2 mb-0">Loading repositories...</p>
+          </div>
+
+          {{/* Empty State */}}
+          <div id="repos-empty" class="text-center py-5 d-none">
+            <svg class="w-16 h-16 mx-auto text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path>
+            </svg>
+            <h3 class="fw-semibold text-dark mb-2">No repositories yet</h3>
+            <p class="text-muted mb-3">Add your first repository to start deploying</p>
+            <button class="btn-primary px-4 py-2 rounded text-white" onclick="document.getElementById('add-repo-btn').click()">
+              Add Repository
+            </button>
+          </div>
+
+          {{/* Repository List */}}
+          <div id="repos-list" class="list-group list-group-flush d-none">
+            {{/* Repos will be dynamically inserted here */}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {{/* Quick Actions & Stats */}}
+    <div class="col-lg-4">
+      {{/* Quick Deploy */}}
+      <div class="card mb-4">
+        <div class="card-header bg-white border-bottom">
+          <h3 class="fw-semibold text-dark mb-0">Quick Deploy</h3>
+        </div>
+        <div class="card-body">
+          <p class="text-muted small mb-3">Deploy selected repositories instantly</p>
+          <div id="selected-count" class="alert alert-info py-2 px-3 mb-3">
+            <span class="fw-semibold">0</span> repositories selected
+          </div>
+          <button id="deploy-selected-btn" class="btn-primary w-100 py-2 rounded text-white fw-semibold" disabled>
+            Deploy Selected
+          </button>
+        </div>
+      </div>
+
+      {{/* Recent Deployments */}}
+      <div class="card">
+        <div class="card-header bg-white border-bottom">
+          <h3 class="fw-semibold text-dark mb-0">Recent Deployments</h3>
+        </div>
+        <div class="card-body">
+          <div id="recent-deployments" class="small">
+            <p class="text-muted mb-0">No recent deployments</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* Add Repository Modal */}}
+<div id="add-repo-modal" class="modal-overlay d-none" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modal-title" class="fw-semibold text-dark mb-0">Add Repository</h3>
+      <button id="close-modal" class="btn-close" aria-label="Close modal"></button>
+    </div>
+    <div class="modal-body">
+      {{/* Search GitHub Repos */}}
+      <div class="mb-3">
+        <label for="github-repo-search" class="form-label">Search your GitHub repositories</label>
+        <input type="text" id="github-repo-search" class="form-control" placeholder="Search...">
+      </div>
+
+      {{/* GitHub Repo List */}}
+      <div id="github-repos-loading" class="text-center py-4 d-none">
+        <div class="spinner-border spinner-border-sm text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+      <div id="github-repos-list" class="list-group" style="max-height: 300px; overflow-y: auto;">
+        {{/* GitHub repos will be inserted here */}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{/* Dashboard JavaScript */}}
+<script>
+(function() {
+  // State
+  let savedRepos = [];
+  let githubRepos = [];
+  let selectedRepoIds = new Set();
+
+  // DOM Elements
+  const reposList = document.getElementById('repos-list');
+  const reposLoading = document.getElementById('repos-loading');
+  const reposEmpty = document.getElementById('repos-empty');
+  const deployAllBtn = document.getElementById('deploy-all-btn');
+  const deploySelectedBtn = document.getElementById('deploy-selected-btn');
+  const selectedCount = document.getElementById('selected-count');
+  const statusBar = document.getElementById('status-bar');
+  const statusMessage = document.getElementById('status-message');
+  const progressSection = document.getElementById('deployment-progress');
+  const progressBar = document.getElementById('progress-bar');
+  const progressDetails = document.getElementById('progress-details');
+  const repoSearch = document.getElementById('repo-search');
+  const addRepoModal = document.getElementById('add-repo-modal');
+  const githubReposList = document.getElementById('github-repos-list');
+  const githubReposLoading = document.getElementById('github-repos-loading');
+  const githubRepoSearch = document.getElementById('github-repo-search');
+
+  // Get auth token (placeholder - implement proper auth)
+  function getAuthToken() {
+    return localStorage.getItem('github_token') || '';
+  }
+
+  function getUserId() {
+    return localStorage.getItem('user_id') || 'demo-user';
+  }
+
+  // Show status message
+  function showStatus(message, type = 'info') {
+    statusBar.className = `alert alert-${type} mb-4`;
+    statusMessage.textContent = message;
+    statusBar.classList.remove('d-none');
+  }
+
+  function hideStatus() {
+    statusBar.classList.add('d-none');
+  }
+
+  // Fetch saved repos
+  async function fetchSavedRepos() {
+    reposLoading.classList.remove('d-none');
+    reposList.classList.add('d-none');
+    reposEmpty.classList.add('d-none');
+
+    try {
+      const response = await fetch('/.netlify/functions/saved-repos', {
+        headers: {
+          'X-User-Id': getUserId(),
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch repos');
+
+      const data = await response.json();
+      savedRepos = data.configs || [];
+      renderReposList();
+    } catch (error) {
+      console.error('Error fetching repos:', error);
+      showStatus('Failed to load repositories. Please try again.', 'danger');
+    } finally {
+      reposLoading.classList.add('d-none');
+    }
+  }
+
+  // Render repos list
+  function renderReposList(filter = '') {
+    const filtered = savedRepos.filter(repo =>
+      repo.fullName.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+      reposList.classList.add('d-none');
+      reposEmpty.classList.remove('d-none');
+      deployAllBtn.disabled = true;
+      return;
+    }
+
+    reposEmpty.classList.add('d-none');
+    reposList.classList.remove('d-none');
+    deployAllBtn.disabled = false;
+
+    reposList.innerHTML = filtered.map(repo => `
+      <div class="list-group-item" data-repo-id="${repo.id}">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" class="repo-checkbox form-check-input me-3"
+                 data-repo-id="${repo.id}"
+                 ${selectedRepoIds.has(repo.id) ? 'checked' : ''}
+                 aria-label="Select ${repo.fullName}">
+          <div class="flex-grow-1">
+            <div class="d-flex justify-content-between align-items-start">
+              <div>
+                <h4 class="fw-semibold mb-1">${repo.fullName}</h4>
+                <div class="small text-muted">
+                  <span class="badge bg-secondary me-2">${repo.selectedBranches.join(', ')}</span>
+                  ${repo.isActive ? '<span class="badge bg-success">Active</span>' : '<span class="badge bg-warning">Inactive</span>'}
+                </div>
+              </div>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-primary deploy-single" data-repo-id="${repo.id}" title="Deploy this repo">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </button>
+                <button class="btn btn-sm btn-outline-danger remove-repo" data-repo-id="${repo.id}" title="Remove repo">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // Add event listeners
+    document.querySelectorAll('.repo-checkbox').forEach(cb => {
+      cb.addEventListener('change', handleRepoSelect);
+    });
+    document.querySelectorAll('.deploy-single').forEach(btn => {
+      btn.addEventListener('click', handleSingleDeploy);
+    });
+    document.querySelectorAll('.remove-repo').forEach(btn => {
+      btn.addEventListener('click', handleRemoveRepo);
+    });
+  }
+
+  // Handle repo selection
+  function handleRepoSelect(e) {
+    const repoId = e.target.dataset.repoId;
+    if (e.target.checked) {
+      selectedRepoIds.add(repoId);
+    } else {
+      selectedRepoIds.delete(repoId);
+    }
+    updateSelectedCount();
+  }
+
+  function updateSelectedCount() {
+    const count = selectedRepoIds.size;
+    selectedCount.innerHTML = `<span class="fw-semibold">${count}</span> repositories selected`;
+    deploySelectedBtn.disabled = count === 0;
+  }
+
+  // Deploy functions
+  async function triggerDeploy(action, configIds = null) {
+    const token = getAuthToken();
+    if (!token) {
+      showStatus('Please connect your GitHub account first', 'warning');
+      return;
+    }
+
+    progressSection.classList.remove('d-none');
+    progressBar.style.width = '0%';
+    progressDetails.innerHTML = '<p class="mb-0">Starting deployment...</p>';
+
+    try {
+      const body = { action };
+      if (configIds) body.configIds = configIds;
+
+      const response = await fetch('/.netlify/functions/deploy', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+          'X-User-Id': getUserId(),
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.error || 'Deployment failed');
+      }
+
+      const result = await response.json();
+
+      // Update progress
+      progressBar.style.width = '100%';
+
+      const details = result.results.map(r => {
+        const icon = r.status === 'success' ? '✓' : r.status === 'partial' ? '⚠' : '✗';
+        const color = r.status === 'success' ? 'text-success' : r.status === 'partial' ? 'text-warning' : 'text-danger';
+        return `<div class="${color}">${icon} ${r.repo} - ${r.status}</div>`;
+      }).join('');
+
+      progressDetails.innerHTML = `
+        <div class="mb-2">${details}</div>
+        <p class="mb-0 fw-semibold">
+          ${result.summary.successful}/${result.summary.total} successful
+        </p>
+      `;
+
+      showStatus(`Deployment completed: ${result.summary.successful}/${result.summary.total} successful`,
+        result.summary.failed > 0 ? 'warning' : 'success');
+
+    } catch (error) {
+      console.error('Deploy error:', error);
+      progressDetails.innerHTML = `<p class="text-danger mb-0">Error: ${error.message}</p>`;
+      showStatus(`Deployment failed: ${error.message}`, 'danger');
+    }
+  }
+
+  function handleSingleDeploy(e) {
+    const repoId = e.currentTarget.dataset.repoId;
+    triggerDeploy('deploy-selected', [repoId]);
+  }
+
+  async function handleRemoveRepo(e) {
+    const repoId = e.currentTarget.dataset.repoId;
+    if (!confirm('Remove this repository from your dashboard?')) return;
+
+    try {
+      const response = await fetch(`/.netlify/functions/saved-repos/${repoId}`, {
+        method: 'DELETE',
+        headers: { 'X-User-Id': getUserId() },
+      });
+
+      if (!response.ok) throw new Error('Failed to remove');
+
+      savedRepos = savedRepos.filter(r => r.id !== repoId);
+      selectedRepoIds.delete(repoId);
+      renderReposList(repoSearch.value);
+      updateSelectedCount();
+      showStatus('Repository removed', 'success');
+    } catch (error) {
+      showStatus('Failed to remove repository', 'danger');
+    }
+  }
+
+  // Modal functions
+  function openModal() {
+    addRepoModal.classList.remove('d-none');
+    fetchGitHubRepos();
+  }
+
+  function closeModal() {
+    addRepoModal.classList.add('d-none');
+  }
+
+  async function fetchGitHubRepos() {
+    githubReposLoading.classList.remove('d-none');
+    githubReposList.innerHTML = '';
+
+    const token = getAuthToken();
+    if (!token) {
+      githubReposList.innerHTML = '<p class="text-muted p-3">Please connect your GitHub account</p>';
+      githubReposLoading.classList.add('d-none');
+      return;
+    }
+
+    try {
+      const response = await fetch('/.netlify/functions/repos', {
+        headers: { 'Authorization': `Bearer ${token}` },
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch');
+
+      const data = await response.json();
+      githubRepos = data.repos || [];
+      renderGitHubRepos();
+    } catch (error) {
+      githubReposList.innerHTML = '<p class="text-danger p-3">Failed to load repositories</p>';
+    } finally {
+      githubReposLoading.classList.add('d-none');
+    }
+  }
+
+  function renderGitHubRepos(filter = '') {
+    const savedIds = new Set(savedRepos.map(r => r.repoId));
+    const filtered = githubRepos.filter(repo =>
+      repo.fullName.toLowerCase().includes(filter.toLowerCase()) &&
+      !savedIds.has(repo.id)
+    );
+
+    if (filtered.length === 0) {
+      githubReposList.innerHTML = '<p class="text-muted p-3">No repositories found</p>';
+      return;
+    }
+
+    githubReposList.innerHTML = filtered.slice(0, 20).map(repo => `
+      <button class="list-group-item list-group-item-action github-repo-item" data-repo='${JSON.stringify(repo)}'>
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>${repo.fullName}</strong>
+            <small class="d-block text-muted">${repo.description || 'No description'}</small>
+          </div>
+          <span class="badge bg-primary">Add</span>
+        </div>
+      </button>
+    `).join('');
+
+    document.querySelectorAll('.github-repo-item').forEach(btn => {
+      btn.addEventListener('click', handleAddRepo);
+    });
+  }
+
+  async function handleAddRepo(e) {
+    const repo = JSON.parse(e.currentTarget.dataset.repo);
+
+    try {
+      const response = await fetch('/.netlify/functions/saved-repos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-User-Id': getUserId(),
+        },
+        body: JSON.stringify({
+          repoId: repo.id,
+          fullName: repo.fullName,
+          selectedBranches: [repo.defaultBranch],
+        }),
+      });
+
+      if (!response.ok) throw new Error('Failed to add');
+
+      const saved = await response.json();
+      savedRepos.push(saved);
+      renderReposList(repoSearch.value);
+      renderGitHubRepos(githubRepoSearch.value);
+      showStatus(`Added ${repo.fullName}`, 'success');
+    } catch (error) {
+      showStatus('Failed to add repository', 'danger');
+    }
+  }
+
+  // Event listeners
+  document.getElementById('add-repo-btn').addEventListener('click', openModal);
+  document.getElementById('close-modal').addEventListener('click', closeModal);
+  addRepoModal.addEventListener('click', (e) => {
+    if (e.target === addRepoModal) closeModal();
+  });
+  document.getElementById('refresh-repos').addEventListener('click', fetchSavedRepos);
+  deployAllBtn.addEventListener('click', () => triggerDeploy('deploy-all'));
+  deploySelectedBtn.addEventListener('click', () => triggerDeploy('deploy-selected', Array.from(selectedRepoIds)));
+  document.getElementById('close-progress').addEventListener('click', () => {
+    progressSection.classList.add('d-none');
+  });
+  repoSearch.addEventListener('input', (e) => renderReposList(e.target.value));
+  githubRepoSearch.addEventListener('input', (e) => renderGitHubRepos(e.target.value));
+
+  // Initialize
+  fetchSavedRepos();
+})();
+</script>
+
+<style>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+.modal-body {
+  padding: 1rem;
+  overflow-y: auto;
+}
+</style>
+{{ end }}

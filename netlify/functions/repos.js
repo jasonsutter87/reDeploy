@@ -87,7 +87,6 @@ exports.handler = async (event, _context) => {
   const params = event.queryStringParameters || {};
   const forceRefresh = params.refresh === 'true';
   const search = params.search?.toLowerCase() || '';
-  const branch = params.branch; // Optional: fetch branches for specific repo
 
   try {
     // If requesting branches for a specific repo

@@ -58,7 +58,9 @@ describe('Repository Management', () => {
         fullName: 'owner/repo',
       };
 
-      expect(() => validateRepoConfig(config)).toThrow('selectedBranches must be a non-empty array');
+      expect(() => validateRepoConfig(config)).toThrow(
+        'selectedBranches must be a non-empty array'
+      );
     });
 
     it('should reject config with empty selectedBranches', () => {
@@ -68,7 +70,9 @@ describe('Repository Management', () => {
         selectedBranches: [],
       };
 
-      expect(() => validateRepoConfig(config)).toThrow('selectedBranches must be a non-empty array');
+      expect(() => validateRepoConfig(config)).toThrow(
+        'selectedBranches must be a non-empty array'
+      );
     });
 
     it('should accept config with multiple branches', () => {
@@ -120,7 +124,9 @@ describe('Repository Management', () => {
 
       await saveRepoConfig('user123', config);
 
-      await expect(saveRepoConfig('user123', config)).rejects.toThrow('Repository already configured');
+      await expect(saveRepoConfig('user123', config)).rejects.toThrow(
+        'Repository already configured'
+      );
     });
   });
 
@@ -198,9 +204,9 @@ describe('Repository Management', () => {
     });
 
     it('should throw error for non-existent config', async () => {
-      await expect(
-        updateRepoConfig('user', 'nonexistent-id', { isActive: false })
-      ).rejects.toThrow('Configuration not found');
+      await expect(updateRepoConfig('user', 'nonexistent-id', { isActive: false })).rejects.toThrow(
+        'Configuration not found'
+      );
     });
 
     it('should not allow updating repoId', async () => {
@@ -212,9 +218,9 @@ describe('Repository Management', () => {
 
       const saved = await saveRepoConfig('userNoUpdate', config);
 
-      await expect(
-        updateRepoConfig('userNoUpdate', saved.id, { repoId: 999 })
-      ).rejects.toThrow('Cannot modify repoId');
+      await expect(updateRepoConfig('userNoUpdate', saved.id, { repoId: 999 })).rejects.toThrow(
+        'Cannot modify repoId'
+      );
     });
   });
 

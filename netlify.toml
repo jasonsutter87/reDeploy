@@ -48,3 +48,24 @@
   to = "/.netlify/functions/auth-callback-google"
   status = 200
 
+# Phase 2 API endpoints
+[[redirects]]
+  from = "/api/repos"
+  to = "/.netlify/functions/repos"
+  status = 200
+
+[[redirects]]
+  from = "/api/saved-repos"
+  to = "/.netlify/functions/saved-repos"
+  status = 200
+
+[[redirects]]
+  from = "/api/saved-repos/*"
+  to = "/.netlify/functions/saved-repos/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/api/deploy"
+  to = "/.netlify/functions/deploy"
+  status = 200
+

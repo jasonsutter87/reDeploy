@@ -81,10 +81,7 @@ describe('GitHub API', () => {
       });
 
       await fetchUserRepos('token', { page: 2, perPage: 50 });
-      expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('page=2'),
-        expect.any(Object)
-      );
+      expect(fetch).toHaveBeenCalledWith(expect.stringContaining('page=2'), expect.any(Object));
       expect(fetch).toHaveBeenCalledWith(
         expect.stringContaining('per_page=50'),
         expect.any(Object)
@@ -133,10 +130,7 @@ describe('GitHub API', () => {
       });
 
       await fetchUserRepos('token', { type: 'owner' });
-      expect(fetch).toHaveBeenCalledWith(
-        expect.stringContaining('type=owner'),
-        expect.any(Object)
-      );
+      expect(fetch).toHaveBeenCalledWith(expect.stringContaining('type=owner'), expect.any(Object));
     });
   });
 
@@ -148,9 +142,7 @@ describe('GitHub API', () => {
       fetch
         .mockResolvedValueOnce({
           ok: true,
-          headers: new Map([
-            ['link', '<https://api.github.com/user/repos?page=2>; rel="next"'],
-          ]),
+          headers: new Map([['link', '<https://api.github.com/user/repos?page=2>; rel="next"']]),
           json: async () => page1,
         })
         .mockResolvedValueOnce({
@@ -169,13 +161,11 @@ describe('GitHub API', () => {
 
       fetch.mockResolvedValue({
         ok: true,
-        headers: new Map([
-          ['link', '<https://api.github.com/user/repos?page=999>; rel="next"'],
-        ]),
+        headers: new Map([['link', '<https://api.github.com/user/repos?page=999>; rel="next"']]),
         json: async () => mockPage,
       });
 
-      const result = await fetchAllUserRepos('token', { maxPages: 3 });
+      await fetchAllUserRepos('token', { maxPages: 3 });
       expect(fetch).toHaveBeenCalledTimes(3);
     });
   });

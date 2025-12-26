@@ -34,6 +34,14 @@ module.exports = [
         __filename: 'readonly',
         console: 'readonly',
         Buffer: 'readonly',
+        global: 'readonly',
+        // Node.js 18+ globals
+        fetch: 'readonly',
+        URLSearchParams: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
         // Jest globals
         describe: 'readonly',
         it: 'readonly',
@@ -44,6 +52,7 @@ module.exports = [
         beforeAll: 'readonly',
         afterAll: 'readonly',
         jest: 'readonly',
+        fail: 'readonly',
       },
     },
     rules: {
