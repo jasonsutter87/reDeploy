@@ -1,79 +1,163 @@
 {{ define "main" }}
-  {{/* Bootstrap: container | Tailwind: py-8 */}}
-  <div class="container py-8">
-
-    {{/* Section Title */}}
-    <h2 class="text-xl font-bold mb-6 text-gray-700">3 Ways to Make 50% Columns</h2>
-
-    {{/* ROW 1: Pure Bootstrap */}}
-    <div class="row mb-6">
-      <div class="col-12 col-lg-6">
-        <div class="bg-primary text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Bootstrap: col-12 col-lg-6</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 col-lg-6</code>
-          </p>
-        </div>
+  {{/* ===== HERO SECTION ===== */}}
+  <section class="hero text-center">
+    <div class="container py-5">
+      <h1 class="hero__title">Rebuild All Your Sites<br class="d-none d-md-inline"> With One Click</h1>
+      <p class="hero__subtitle max-w-2xl mx-auto mb-5">
+        Trigger deployments across all your GitHub repos instantly.
+        No more manual rebuilds. No more forgotten updates.
+      </p>
+      <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+        <a href="/signup" class="btn-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium">
+          Get Started Free
+        </a>
+        <a href="/login" class="bg-white text-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium hover:bg-gray-100 transition-colors">
+          Sign In
+        </a>
       </div>
-      <div class="col-12 col-lg-6">
-        <div class="bg-primary text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Bootstrap: col-12 col-lg-6</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 col-lg-6</code>
-          </p>
+    </div>
+  </section>
+
+  {{/* ===== FEATURES SECTION ===== */}}
+  <section class="py-5 bg-white">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="text-3xl font-bold text-dark mb-3">Why reDeploy?</h2>
+        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+          Managing multiple static sites is tedious. reDeploy makes it simple.
+        </p>
+      </div>
+
+      <div class="row">
+        {{/* Feature 1 */}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <div class="text-center p-4 h-full">
+            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-2">One-Click Deploy</h3>
+            <p class="text-gray-600 mb-0">
+              Trigger rebuilds for all your selected repos with a single button click.
+            </p>
+          </div>
+        </div>
+
+        {{/* Feature 2 */}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <div class="text-center p-4 h-full">
+            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-2">Multi-Repo Support</h3>
+            <p class="text-gray-600 mb-0">
+              Connect unlimited GitHub repositories and manage them from one dashboard.
+            </p>
+          </div>
+        </div>
+
+        {{/* Feature 3 */}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <div class="text-center p-4 h-full">
+            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-2">Secure OAuth</h3>
+            <p class="text-gray-600 mb-0">
+              Connect via GitHub OAuth. We never store your credentials or access tokens long-term.
+            </p>
+          </div>
+        </div>
+
+        {{/* Feature 4 */}}
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <div class="text-center p-4 h-full">
+            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
+              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-2">Save Time</h3>
+            <p class="text-gray-600 mb-0">
+              Stop wasting time on manual deploys. Focus on what matters - building great sites.
+            </p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    {{/* ROW 2: Pure Tailwind */}}
-    <div class="row mb-6">
-      <div class="w-full lg:w-1/2 px-3">
-        <div class="bg-emerald-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Tailwind: w-full lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">w-full lg:w-1/2</code>
-          </p>
-        </div>
+  {{/* ===== HOW IT WORKS SECTION ===== */}}
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="text-3xl font-bold text-dark mb-3">How It Works</h2>
+        <p class="text-gray-600 text-lg">Three simple steps to automated deployments</p>
       </div>
-      <div class="w-full lg:w-1/2 px-3">
-        <div class="bg-emerald-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Tailwind: w-full lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">w-full lg:w-1/2</code>
-          </p>
+
+      <div class="row justify-content-center">
+        {{/* Step 1 */}}
+        <div class="col-12 col-md-4 mb-4 mb-md-0">
+          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
+            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
+              1
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">Connect GitHub</h3>
+            <p class="text-gray-600 mb-0">
+              Sign in with your GitHub account using secure OAuth authentication.
+            </p>
+          </div>
+        </div>
+
+        {{/* Step 2 */}}
+        <div class="col-12 col-md-4 mb-4 mb-md-0">
+          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
+            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
+              2
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">Select Repos</h3>
+            <p class="text-gray-600 mb-0">
+              Choose which repositories you want to include in your deploy group.
+            </p>
+          </div>
+        </div>
+
+        {{/* Step 3 */}}
+        <div class="col-12 col-md-4">
+          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
+            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
+              3
+            </div>
+            <h3 class="text-xl font-bold text-dark mb-3">Click Deploy</h3>
+            <p class="text-gray-600 mb-0">
+              Hit the deploy button and watch all your sites rebuild simultaneously.
+            </p>
+          </div>
         </div>
       </div>
     </div>
+  </section>
 
-    {{/* ROW 3: Mixed - Bootstrap + Tailwind */}}
-    <div class="row mb-6">
-      <div class="col-12 lg:w-1/2">
-        <div class="bg-purple-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Mixed: col-12 lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 lg:w-1/2</code>
-          </p>
-        </div>
-      </div>
-      <div class="col-12 lg:w-1/2">
-        <div class="bg-purple-600 text-white p-6 rounded-lg h-full">
-          <h3 class="text-lg font-bold mb-2">Mixed: col-12 lg:w-1/2</h3>
-          <p class="mb-0 text-sm">
-            <code class="bg-dark px-2 py-1 rounded">col-12 lg:w-1/2</code>
-          </p>
-        </div>
+  {{/* ===== CTA SECTION ===== */}}
+  <section class="py-5 bg-dark text-white">
+    <div class="container text-center">
+      <h2 class="text-3xl font-bold mb-3">Ready to Simplify Your Deployments?</h2>
+      <p class="text-gray-300 text-lg mb-5 max-w-2xl mx-auto">
+        Join developers who are saving hours every week with one-click multi-repo deployments.
+      </p>
+      <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+        <a href="/signup" class="btn-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium">
+          Get Started Free
+        </a>
+        <a href="/login" class="bg-transparent border border-white text-white px-5 py-3 text-lg rounded-lg text-decoration-none font-medium hover:bg-white hover:text-dark transition-colors">
+          Sign In
+        </a>
       </div>
     </div>
-
-    {{/* Legend */}}
-    <div class="mt-8 p-4 bg-white rounded-lg shadow">
-      <h4 class="font-bold mb-3">Color Legend:</h4>
-      <ul class="list-unstyled mb-0 d-flex gap-4 flex-wrap">
-        <li><span class="bg-primary text-white px-2 py-1 rounded text-sm">Blue</span> = Bootstrap classes</li>
-        <li><span class="bg-emerald-600 text-white px-2 py-1 rounded text-sm">Green</span> = Tailwind classes</li>
-        <li><span class="bg-purple-600 text-white px-2 py-1 rounded text-sm">Purple</span> = Mixed approach</li>
-      </ul>
-    </div>
-
-  </div>
+  </section>
 {{ end }}

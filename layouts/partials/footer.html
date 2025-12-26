@@ -2,14 +2,50 @@
 <div class="container py-5">
   <div class="row">
     {{/* Company info */}}
-    <div class="col-12 col-md-6 mb-4 mb-md-0">
-      <h4 class="fw-bold mb-3">{{ .Site.Title }}</h4>
-      {{/* Changed from text-gray-400 to text-gray-300 for WCAG AA compliance (4.5:1 contrast) */}}
-      <p class="text-gray-300 mb-0">{{ .Site.Params.companyName | default "Your Company" }}</p>
+    <div class="col-12 col-md-4 mb-4 mb-md-0">
+      <h4 class="fw-bold mb-3">{{ .Site.Params.companyName | default "reDeploy" }}</h4>
+      <p class="text-gray-300 mb-0">
+        One-click deployment trigger for all your GitHub repositories.
+      </p>
     </div>
-    {{/* Copyright */}}
-    <div class="col-12 col-md-6 md:text-right">
-      <p class="text-gray-300 mb-0">&copy; {{ now.Year }} {{ .Site.Params.companyName | default "Your Company" }}. All rights reserved.</p>
+
+    {{/* Quick Links */}}
+    <div class="col-12 col-md-4 mb-4 mb-md-0">
+      <h5 class="fw-bold mb-3">Quick Links</h5>
+      <ul class="list-unstyled mb-0">
+        <li class="mb-2">
+          <a href="/signup" class="text-gray-300 text-decoration-none hover:text-white">Get Started</a>
+        </li>
+        <li class="mb-2">
+          <a href="/login" class="text-gray-300 text-decoration-none hover:text-white">Sign In</a>
+        </li>
+        <li class="mb-2">
+          <a href="https://github.com" class="text-gray-300 text-decoration-none hover:text-white" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </li>
+      </ul>
     </div>
+
+    {{/* Legal Links */}}
+    <div class="col-12 col-md-4">
+      <h5 class="fw-bold mb-3">Legal</h5>
+      <ul class="list-unstyled mb-0">
+        <li class="mb-2">
+          <a href="/privacy-policy" class="text-gray-300 text-decoration-none hover:text-white">Privacy Policy</a>
+        </li>
+        <li class="mb-2">
+          <a href="/terms-of-use" class="text-gray-300 text-decoration-none hover:text-white">Terms of Use</a>
+        </li>
+        <li class="mb-2">
+          <a href="/accessibility-statement" class="text-gray-300 text-decoration-none hover:text-white">Accessibility</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  {{/* Copyright bar */}}
+  <div class="border-t border-gray-700 mt-4 pt-4">
+    <p class="text-gray-300 text-center mb-0">
+      &copy; {{ now.Year }} {{ .Site.Params.companyName | default "reDeploy" }}. All rights reserved.
+    </p>
   </div>
 </div>
