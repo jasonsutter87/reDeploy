@@ -1,0 +1,12 @@
+node_modules/
+public/
+resources/
+coverage/
+*.min.js
+*.min.css
+package-lock.json
+
+# Hugo templates (contain Go template syntax that Prettier cannot parse)
+layouts/
+archetypes/
+content/*.html
