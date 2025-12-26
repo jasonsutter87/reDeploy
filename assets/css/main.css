@@ -1147,3 +1147,115 @@
     font-size: 1.25rem;
   }
 }
+
+/* Additional utilities for landing page */
+.transition-colors {
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.opacity-90 {
+  opacity: 0.9;
+}
+
+.border-t {
+  border-top: 1px solid;
+}
+
+.border-gray-700 {
+  border-color: #374151;
+}
+
+/* Hover utilities */
+.hover\:bg-white:hover {
+  background-color: white;
+}
+
+.hover\:bg-gray-100:hover {
+  background-color: #f3f4f6;
+}
+
+.hover\:text-primary:hover {
+  color: #0d6efd;
+}
+
+.hover\:text-white:hover {
+  color: white;
+}
+
+.hover\:underline:hover {
+  text-decoration: underline;
+}
+
+/* Width and height utilities */
+.w-6 {
+  width: 1.5rem;
+}
+
+.h-6 {
+  height: 1.5rem;
+}
+
+.w-8 {
+  width: 2rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.w-16 {
+  width: 4rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
+/* Padding utilities */
+.px-6 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Text sizes */
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+/* Text colors */
+.text-gray-300 {
+  color: #d1d5db;
+}
+
+.text-gray-400 {
+  color: #9ca3af;
+}

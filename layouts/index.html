@@ -1,163 +1,182 @@
 {{ define "main" }}
-  {{/* ===== HERO SECTION ===== */}}
-  <section class="hero text-center">
-    <div class="container py-5">
-      <h1 class="hero__title">Rebuild All Your Sites<br class="d-none d-md-inline"> With One Click</h1>
-      <p class="hero__subtitle max-w-2xl mx-auto mb-5">
-        Trigger deployments across all your GitHub repos instantly.
-        No more manual rebuilds. No more forgotten updates.
-      </p>
-      <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-        <a href="/signup" class="btn-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium">
-          Get Started Free
-        </a>
-        <a href="/login" class="bg-white text-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium hover:bg-gray-100 transition-colors">
-          Sign In
-        </a>
-      </div>
+{{/* Hero Section */}}
+<section class="hero text-center px-4">
+  <div class="container">
+    <h1 class="hero__title">
+      Deploy All Your Sites<br class="d-none d-md-block"> With One Click
+    </h1>
+    <p class="hero__subtitle mb-5 mx-auto" style="max-width: 600px;">
+      Stop manually triggering deployments across multiple repositories. Connect your GitHub repos and deploy them all instantly with a single click.
+    </p>
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+      <a href="/signup" class="btn-primary text-lg px-6 py-3 text-decoration-none">
+        Get Started Free
+      </a>
+      <a href="/login" class="bg-transparent border border-white text-white px-6 py-3 rounded text-decoration-none hover:bg-white hover:text-primary transition-colors">
+        Sign In
+      </a>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{/* ===== FEATURES SECTION ===== */}}
-  <section class="py-5 bg-white">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="text-3xl font-bold text-dark mb-3">Why reDeploy?</h2>
-        <p class="text-gray-600 text-lg max-w-2xl mx-auto">
-          Managing multiple static sites is tedious. reDeploy makes it simple.
-        </p>
-      </div>
+{{/* Features Section */}}
+<section class="py-5 bg-white" aria-labelledby="features-heading">
+  <div class="container py-4">
+    <h2 id="features-heading" class="text-3xl fw-bold text-center mb-2 text-dark">
+      Why Choose reDeploy?
+    </h2>
+    <p class="text-center text-muted mb-5 mx-auto" style="max-width: 500px;">
+      Simple, fast, and reliable deployment management for developers and teams.
+    </p>
 
-      <div class="row">
-        {{/* Feature 1 */}}
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
-          <div class="text-center p-4 h-full">
-            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">One-Click Deploy</h3>
-            <p class="text-gray-600 mb-0">
-              Trigger rebuilds for all your selected repos with a single button click.
-            </p>
+    <div class="row">
+      {{/* Feature 1 */}}
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-full text-center p-4">
+          <div class="text-primary mb-3">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
           </div>
-        </div>
-
-        {{/* Feature 2 */}}
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
-          <div class="text-center p-4 h-full">
-            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Multi-Repo Support</h3>
-            <p class="text-gray-600 mb-0">
-              Connect unlimited GitHub repositories and manage them from one dashboard.
-            </p>
-          </div>
-        </div>
-
-        {{/* Feature 3 */}}
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
-          <div class="text-center p-4 h-full">
-            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Secure OAuth</h3>
-            <p class="text-gray-600 mb-0">
-              Connect via GitHub OAuth. We never store your credentials or access tokens long-term.
-            </p>
-          </div>
-        </div>
-
-        {{/* Feature 4 */}}
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
-          <div class="text-center p-4 h-full">
-            <div class="w-16 h-16 bg-primary rounded-full d-flex align-items-center justify-content-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-2">Save Time</h3>
-            <p class="text-gray-600 mb-0">
-              Stop wasting time on manual deploys. Focus on what matters - building great sites.
-            </p>
-          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">One-Click Deploy</h3>
+          <p class="text-muted mb-0">
+            Trigger deployments across all selected repositories with a single button press. No more repetitive manual work.
+          </p>
         </div>
       </div>
-    </div>
-  </section>
 
-  {{/* ===== HOW IT WORKS SECTION ===== */}}
-  <section class="py-5 bg-light">
-    <div class="container">
-      <div class="text-center mb-5">
-        <h2 class="text-3xl font-bold text-dark mb-3">How It Works</h2>
-        <p class="text-gray-600 text-lg">Three simple steps to automated deployments</p>
+      {{/* Feature 2 */}}
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-full text-center p-4">
+          <div class="text-primary mb-3">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Secure OAuth</h3>
+          <p class="text-muted mb-0">
+            Connect securely with GitHub OAuth. We never store your credentials, only the access you explicitly grant.
+          </p>
+        </div>
       </div>
 
-      <div class="row justify-content-center">
-        {{/* Step 1 */}}
-        <div class="col-12 col-md-4 mb-4 mb-md-0">
-          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
-            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
-              1
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-3">Connect GitHub</h3>
-            <p class="text-gray-600 mb-0">
-              Sign in with your GitHub account using secure OAuth authentication.
-            </p>
+      {{/* Feature 3 */}}
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-full text-center p-4">
+          <div class="text-primary mb-3">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+            </svg>
           </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Multi-Repo Management</h3>
+          <p class="text-muted mb-0">
+            Manage multiple repositories from one dashboard. Select which repos to include in your deployment workflow.
+          </p>
         </div>
+      </div>
 
-        {{/* Step 2 */}}
-        <div class="col-12 col-md-4 mb-4 mb-md-0">
-          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
-            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
-              2
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-3">Select Repos</h3>
-            <p class="text-gray-600 mb-0">
-              Choose which repositories you want to include in your deploy group.
-            </p>
+      {{/* Feature 4 */}}
+      <div class="col-12 col-md-6 col-lg-3 mb-4">
+        <div class="card h-full text-center p-4">
+          <div class="text-primary mb-3">
+            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
           </div>
-        </div>
-
-        {{/* Step 3 */}}
-        <div class="col-12 col-md-4">
-          <div class="bg-white rounded-lg shadow p-5 text-center h-full">
-            <div class="w-12 h-12 bg-primary text-white rounded-full d-flex align-items-center justify-content-center mx-auto mb-4 text-xl font-bold">
-              3
-            </div>
-            <h3 class="text-xl font-bold text-dark mb-3">Click Deploy</h3>
-            <p class="text-gray-600 mb-0">
-              Hit the deploy button and watch all your sites rebuild simultaneously.
-            </p>
-          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Instant Feedback</h3>
+          <p class="text-muted mb-0">
+            See deployment status in real-time. Know immediately when your sites are live or if something needs attention.
+          </p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  {{/* ===== CTA SECTION ===== */}}
-  <section class="py-5 bg-dark text-white">
-    <div class="container text-center">
-      <h2 class="text-3xl font-bold mb-3">Ready to Simplify Your Deployments?</h2>
-      <p class="text-gray-300 text-lg mb-5 max-w-2xl mx-auto">
-        Join developers who are saving hours every week with one-click multi-repo deployments.
-      </p>
-      <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-        <a href="/signup" class="btn-primary px-5 py-3 text-lg rounded-lg text-decoration-none font-medium">
-          Get Started Free
-        </a>
-        <a href="/login" class="bg-transparent border border-white text-white px-5 py-3 text-lg rounded-lg text-decoration-none font-medium hover:bg-white hover:text-dark transition-colors">
-          Sign In
-        </a>
+{{/* How It Works Section */}}
+<section class="py-5 bg-light" aria-labelledby="how-it-works-heading">
+  <div class="container py-4">
+    <h2 id="how-it-works-heading" class="text-3xl fw-bold text-center mb-2 text-dark">
+      How It Works
+    </h2>
+    <p class="text-center text-muted mb-5 mx-auto" style="max-width: 500px;">
+      Get started in three simple steps. No complex configuration required.
+    </p>
+
+    <div class="row align-items-center">
+      {{/* Step 1 */}}
+      <div class="col-12 col-md-4 mb-4 mb-md-0">
+        <div class="text-center">
+          <div class="bg-primary text-white rounded-full w-16 h-16 d-flex align-items-center justify-content-center mx-auto mb-3 text-2xl fw-bold">
+            1
+          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Connect GitHub</h3>
+          <p class="text-muted mb-0">
+            Sign in with your GitHub account using secure OAuth authentication.
+          </p>
+        </div>
+      </div>
+
+      {{/* Arrow (desktop only) */}}
+      <div class="d-none d-md-block col-md-0 text-center" style="flex: 0; position: relative;">
+        <svg class="w-8 h-8 text-gray-400" style="position: absolute; left: -16px; top: 50%; transform: translateY(-50%);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+
+      {{/* Step 2 */}}
+      <div class="col-12 col-md-4 mb-4 mb-md-0">
+        <div class="text-center">
+          <div class="bg-primary text-white rounded-full w-16 h-16 d-flex align-items-center justify-content-center mx-auto mb-3 text-2xl fw-bold">
+            2
+          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Select Repos</h3>
+          <p class="text-muted mb-0">
+            Choose which repositories you want to include in your deployment group.
+          </p>
+        </div>
+      </div>
+
+      {{/* Arrow (desktop only) */}}
+      <div class="d-none d-md-block col-md-0 text-center" style="flex: 0; position: relative;">
+        <svg class="w-8 h-8 text-gray-400" style="position: absolute; left: -16px; top: 50%; transform: translateY(-50%);" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+
+      {{/* Step 3 */}}
+      <div class="col-12 col-md-4">
+        <div class="text-center">
+          <div class="bg-primary text-white rounded-full w-16 h-16 d-flex align-items-center justify-content-center mx-auto mb-3 text-2xl fw-bold">
+            3
+          </div>
+          <h3 class="fw-bold text-lg mb-2 text-dark">Deploy</h3>
+          <p class="text-muted mb-0">
+            Click the deploy button and watch all your selected sites rebuild instantly.
+          </p>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+
+{{/* CTA Section */}}
+<section class="py-5 bg-primary" aria-labelledby="cta-heading">
+  <div class="container py-4 text-center">
+    <h2 id="cta-heading" class="text-3xl fw-bold text-white mb-3">
+      Ready to Simplify Your Deployments?
+    </h2>
+    <p class="text-white opacity-90 mb-4 mx-auto" style="max-width: 500px;">
+      Join developers who save time by deploying all their sites with a single click.
+    </p>
+    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+      <a href="/signup" class="bg-white text-primary px-6 py-3 rounded text-decoration-none fw-bold hover:bg-gray-100 transition-colors">
+        Get Started Free
+      </a>
+      <a href="/login" class="bg-transparent border border-white text-white px-6 py-3 rounded text-decoration-none hover:bg-white hover:text-primary transition-colors">
+        Sign In
+      </a>
+    </div>
+  </div>
+</section>
 {{ end }}
