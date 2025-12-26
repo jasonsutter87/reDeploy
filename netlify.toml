@@ -1,8 +1,50 @@
 [build]
   publish = "public"
   command = "npm run build"
+  functions = "netlify/functions"
 
 [context.production.environment]
   HUGO_VERSION = "0.147.4"
   NODE_VERSION = "20"
+
+# Netlify Functions configuration
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# TODO: Add environment variables in Netlify dashboard:
+# - GITHUB_CLIENT_ID
+# - GITHUB_CLIENT_SECRET
+# - GITHUB_REDIRECT_URI
+# - GOOGLE_CLIENT_ID
+# - GOOGLE_CLIENT_SECRET
+# - GOOGLE_REDIRECT_URI
+# - JWT_SECRET
+# - SESSION_SECRET
+
+# API redirects for cleaner URLs
+[[redirects]]
+  from = "/api/auth/*"
+  to = "/.netlify/functions/auth-:splat"
+  status = 200
+
+[[redirects]]
+  from = "/auth/github"
+  to = "/.netlify/functions/auth-github"
+  status = 200
+
+[[redirects]]
+  from = "/auth/github/callback"
+  to = "/.netlify/functions/auth-callback-github"
+  status = 200
+
+[[redirects]]
+  from = "/auth/google"
+  to = "/.netlify/functions/auth-google"
+  status = 200
+
+[[redirects]]
+  from = "/auth/google/callback"
+  to = "/.netlify/functions/auth-callback-google"
+  status = 200
 
