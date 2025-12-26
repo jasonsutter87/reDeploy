@@ -1,7 +1,7 @@
 /**
  * Auth Configuration for reDeploy
  * Phase 1.2 - Authentication System Foundation
- * 
+ *
  * This file contains configuration for all authentication providers.
  * Environment variables should be set in Netlify dashboard.
  */
@@ -10,7 +10,7 @@ const AUTH_CONFIG = {
   /**
    * GitHub OAuth Configuration
    * Scopes: repo (for deployment triggers), user:email (for user identification)
-   * 
+   *
    * Required env vars:
    * - GITHUB_CLIENT_ID
    * - GITHUB_CLIENT_SECRET
@@ -29,7 +29,7 @@ const AUTH_CONFIG = {
   /**
    * Google OAuth Configuration
    * Scopes: email, profile (basic user info)
-   * 
+   *
    * Required env vars:
    * - GOOGLE_CLIENT_ID
    * - GOOGLE_CLIENT_SECRET
@@ -47,7 +47,7 @@ const AUTH_CONFIG = {
   /**
    * Email/Password Authentication Configuration
    * Uses secure password hashing (bcrypt) and JWT tokens
-   * 
+   *
    * Required env vars:
    * - JWT_SECRET (for signing tokens)
    * - SESSION_SECRET (for session management)
@@ -59,11 +59,11 @@ const AUTH_CONFIG = {
     passwordRequireLowercase: true,
     passwordRequireNumber: true,
     passwordRequireSpecial: false, // Optional for better UX
-    
+
     // Token configuration
-    accessTokenExpiry: '15m',  // Short-lived access tokens
-    refreshTokenExpiry: '7d',  // Longer refresh tokens
-    
+    accessTokenExpiry: '15m', // Short-lived access tokens
+    refreshTokenExpiry: '7d', // Longer refresh tokens
+
     // TODO: Implement email verification flow
     // TODO: Implement password reset flow
     // TODO: Add rate limiting for login attempts
@@ -72,7 +72,7 @@ const AUTH_CONFIG = {
 
   /**
    * Session Configuration
-   * 
+   *
    * Required env vars:
    * - SESSION_SECRET
    */
@@ -93,7 +93,7 @@ const AUTH_CONFIG = {
       'https://redeploy.app',
       'http://localhost:1313', // Hugo dev server
     ],
-    
+
     // TODO: Implement CSRF token validation
     // TODO: Add request signing for API calls
     // TODO: Implement audit logging for auth events

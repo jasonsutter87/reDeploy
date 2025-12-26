@@ -40,8 +40,11 @@ const { AUTH_CONFIG } = require('./auth-config');
  * - Server errors
  */
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, _context) => {
+  // These will be used for routing when implemented
+  // eslint-disable-next-line no-unused-vars
   const path = event.path;
+  // eslint-disable-next-line no-unused-vars
   const method = event.httpMethod;
 
   // TODO: Route to appropriate handler based on path

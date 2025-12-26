@@ -1,10 +1,12 @@
 /**
  * Google OAuth Callback Handler
  * Phase 1.2 - Authentication System Foundation
- * 
+ *
  * Handles the callback from Google after user authorization.
  */
 
+// AUTH_CONFIG will be used when implementing token exchange
+// eslint-disable-next-line no-unused-vars
 const { AUTH_CONFIG } = require('./auth-config');
 
 /**
@@ -26,7 +28,7 @@ const { AUTH_CONFIG } = require('./auth-config');
  * 11. Redirect to dashboard or original destination
  */
 
-exports.handler = async (event, context) => {
+exports.handler = async (event, _context) => {
   const params = event.queryStringParameters || {};
   const code = params.code;
   const state = params.state;

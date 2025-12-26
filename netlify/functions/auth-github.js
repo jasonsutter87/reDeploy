@@ -1,7 +1,7 @@
 /**
  * GitHub OAuth Handler
  * Phase 1.2 - Authentication System Foundation
- * 
+ *
  * Initiates GitHub OAuth flow by redirecting to GitHub's authorization page.
  */
 
@@ -19,9 +19,9 @@ const { AUTH_CONFIG } = require('./auth-config');
  * 4. Handle errors gracefully with user-friendly messages
  */
 
-exports.handler = async (event, context) => {
+exports.handler = async (_event, _context) => {
   // TODO: Implement GitHub OAuth initiation
-  
+
   // Placeholder response for structure verification
   return {
     statusCode: 501,

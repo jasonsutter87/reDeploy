@@ -1,10 +1,10 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./layouts/**/*.html",
-    "./content/**/*.{html,md}",
-    "./assets/**/*.js",
-    "./assets/scss/**/*.scss",
+    './layouts/**/*.html',
+    './content/**/*.{html,md}',
+    './assets/**/*.js',
+    './assets/scss/**/*.scss',
   ],
   // Minimal safelist - only for DevTools testing and CMS content
   // Most classes are auto-detected from templates by Tailwind JIT
@@ -24,40 +24,46 @@ module.exports = {
     // Colors commonly used in CMS content
     { pattern: /^bg-(gray|red|green|blue|emerald|purple)-(500|600|700|800)$/ },
     { pattern: /^text-gray-(300|400|500|600|700)$/ },
-    'bg-white', 'bg-black', 'bg-transparent',
-    'text-white', 'text-black',
+    'bg-white',
+    'bg-black',
+    'bg-transparent',
+    'text-white',
+    'text-black',
     // Focus states for accessibility
-    'focus:outline-none', 'focus:ring-2', 'focus:ring-white', 'focus:ring-offset-2',
+    'focus:outline-none',
+    'focus:ring-2',
+    'focus:ring-white',
+    'focus:ring-offset-2',
   ],
   theme: {
     extend: {
       // Bootstrap color names mapped to values
       colors: {
-        'primary': '#0d6efd',
-        'secondary': '#6c757d',
-        'success': '#198754',
-        'danger': '#dc3545',
-        'warning': '#ffc107',
-        'info': '#0dcaf0',
-        'light': '#f8f9fa',
-        'dark': '#212529',
+        primary: '#0d6efd',
+        secondary: '#6c757d',
+        success: '#198754',
+        danger: '#dc3545',
+        warning: '#ffc107',
+        info: '#0dcaf0',
+        light: '#f8f9fa',
+        dark: '#212529',
       },
       fontFamily: {
-        'sans': ['Lato', 'sans-serif'],
-        'roboto': ['Roboto', 'sans-serif'],
+        sans: ['Lato', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
       },
       maxWidth: {
-        '1340': '1340px',
+        1340: '1340px',
       },
     },
     // Bootstrap breakpoints
     screens: {
-      'sm': '576px',
-      'md': '768px',
-      'lg': '992px',
-      'xl': '1200px',
-      'xxl': '1400px',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+      xxl: '1400px',
     },
   },
   plugins: [],
-}
+};

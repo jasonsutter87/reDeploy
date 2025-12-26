@@ -3,11 +3,21 @@ const prettier = require('eslint-plugin-prettier');
 const prettierConfig = require('eslint-config-prettier');
 
 module.exports = [
+  // Global ignores
+  {
+    ignores: [
+      'node_modules/**',
+      'public/**',
+      'resources/**',
+      'coverage/**',
+      'assets/src/js/**', // Vendor/third-party JS
+    ],
+  },
   js.configs.recommended,
   prettierConfig,
+  // Node.js files (netlify functions, config files)
   {
-    files: ['**/*.js'],
-    ignores: ['node_modules/**', 'public/**', 'resources/**', 'coverage/**'],
+    files: ['netlify/**/*.js', '*.config.js', 'tests/**/*.js'],
     plugins: {
       prettier: prettier,
     },
@@ -19,6 +29,7 @@ module.exports = [
         module: 'readonly',
         require: 'readonly',
         process: 'readonly',
+        exports: 'readonly',
         __dirname: 'readonly',
         __filename: 'readonly',
         console: 'readonly',
@@ -36,20 +47,49 @@ module.exports = [
       },
     },
     rules: {
-      // Prettier integration
       'prettier/prettier': 'error',
-
-      // Best practices
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],
-
-      // Code quality
       'no-var': 'error',
       'prefer-const': 'error',
-      'no-multiple-empty-lines': ['error', { max: 2 }],
-      'no-trailing-spaces': 'error',
+    },
+  },
+  // Browser files (static JS)
+  {
+    files: ['static/**/*.js'],
+    plugins: {
+      prettier: prettier,
+    },
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'script',
+      globals: {
+        // Browser globals
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+        fetch: 'readonly',
+        localStorage: 'readonly',
+        sessionStorage: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
+        // jQuery (if used)
+        $: 'readonly',
+        jQuery: 'readonly',
+      },
+    },
+    rules: {
+      'prettier/prettier': 'error',
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-console': 'warn',
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+      'no-var': 'error',
+      'prefer-const': 'error',
     },
   },
 ];

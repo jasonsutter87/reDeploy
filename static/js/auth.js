@@ -5,7 +5,8 @@
  * Handles client-side authentication logic for reDeploy.
  */
 
-// TODO: Configuration
+// TODO: Configuration - will be used when implementing auth functions
+// eslint-disable-next-line no-unused-vars
 const AUTH_CONFIG = {
   // TODO: Update these endpoints based on netlify.toml redirects
   endpoints: {

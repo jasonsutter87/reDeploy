@@ -1,7 +1,7 @@
 /**
  * Google OAuth Handler
  * Phase 1.2 - Authentication System Foundation
- * 
+ *
  * Initiates Google OAuth flow by redirecting to Google's authorization page.
  */
 
@@ -23,9 +23,9 @@ const { AUTH_CONFIG } = require('./auth-config');
  * 5. Redirect user to Google authorization URL
  */
 
-exports.handler = async (event, context) => {
+exports.handler = async (_event, _context) => {
   // TODO: Implement Google OAuth initiation
-  
+
   // Placeholder response
   return {
     statusCode: 501,
