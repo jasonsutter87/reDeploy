@@ -75,9 +75,21 @@ describe('Deployment History', () => {
 
   describe('getDeploymentHistory', () => {
     it('should return all deployments for a user', () => {
-      logDeployment('user1', { repo: 'owner/repo1', branch: 'main', status: DeploymentStatus.SUCCESS });
-      logDeployment('user1', { repo: 'owner/repo2', branch: 'main', status: DeploymentStatus.SUCCESS });
-      logDeployment('user2', { repo: 'owner/repo3', branch: 'main', status: DeploymentStatus.SUCCESS });
+      logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      logDeployment('user1', {
+        repo: 'owner/repo2',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      logDeployment('user2', {
+        repo: 'owner/repo3',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       const history = getDeploymentHistory('user1');
 
@@ -86,9 +98,21 @@ describe('Deployment History', () => {
     });
 
     it('should return deployments in reverse chronological order', () => {
-      const log1 = logDeployment('user1', { repo: 'owner/repo1', branch: 'main', status: DeploymentStatus.SUCCESS });
-      const log2 = logDeployment('user1', { repo: 'owner/repo2', branch: 'main', status: DeploymentStatus.SUCCESS });
-      const log3 = logDeployment('user1', { repo: 'owner/repo3', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log1 = logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      const log2 = logDeployment('user1', {
+        repo: 'owner/repo2',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      const log3 = logDeployment('user1', {
+        repo: 'owner/repo3',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       // Manually set different timestamps to test ordering
       log1.triggeredAt = '2025-01-15T10:00:00Z';
@@ -102,9 +126,21 @@ describe('Deployment History', () => {
     });
 
     it('should filter by status', () => {
-      logDeployment('user1', { repo: 'owner/repo1', branch: 'main', status: DeploymentStatus.SUCCESS });
-      logDeployment('user1', { repo: 'owner/repo2', branch: 'main', status: DeploymentStatus.FAILED });
-      logDeployment('user1', { repo: 'owner/repo3', branch: 'main', status: DeploymentStatus.SUCCESS });
+      logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      logDeployment('user1', {
+        repo: 'owner/repo2',
+        branch: 'main',
+        status: DeploymentStatus.FAILED,
+      });
+      logDeployment('user1', {
+        repo: 'owner/repo3',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       const successOnly = getDeploymentHistory('user1', { status: DeploymentStatus.SUCCESS });
 
@@ -113,9 +149,21 @@ describe('Deployment History', () => {
     });
 
     it('should filter by repo', () => {
-      logDeployment('user1', { repo: 'owner/repo1', branch: 'main', status: DeploymentStatus.SUCCESS });
-      logDeployment('user1', { repo: 'owner/repo2', branch: 'main', status: DeploymentStatus.SUCCESS });
-      logDeployment('user1', { repo: 'owner/repo1', branch: 'develop', status: DeploymentStatus.SUCCESS });
+      logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      logDeployment('user1', {
+        repo: 'owner/repo2',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
+      logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'develop',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       const repo1Only = getDeploymentHistory('user1', { repo: 'owner/repo1' });
 
@@ -129,13 +177,25 @@ describe('Deployment History', () => {
       const twoDaysAgo = new Date(now.getTime() - 48 * 60 * 60 * 1000);
 
       // Manually set timestamps for testing
-      const log1 = logDeployment('user1', { repo: 'owner/repo1', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log1 = logDeployment('user1', {
+        repo: 'owner/repo1',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
       log1.triggeredAt = twoDaysAgo.toISOString();
 
-      const log2 = logDeployment('user1', { repo: 'owner/repo2', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log2 = logDeployment('user1', {
+        repo: 'owner/repo2',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
       log2.triggeredAt = yesterday.toISOString();
 
-      const log3 = logDeployment('user1', { repo: 'owner/repo3', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log3 = logDeployment('user1', {
+        repo: 'owner/repo3',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
       log3.triggeredAt = now.toISOString();
 
       const last24Hours = getDeploymentHistory('user1', {
@@ -147,7 +207,11 @@ describe('Deployment History', () => {
 
     it('should limit results', () => {
       for (let i = 0; i < 10; i++) {
-        logDeployment('user1', { repo: `owner/repo${i}`, branch: 'main', status: DeploymentStatus.SUCCESS });
+        logDeployment('user1', {
+          repo: `owner/repo${i}`,
+          branch: 'main',
+          status: DeploymentStatus.SUCCESS,
+        });
       }
 
       const limited = getDeploymentHistory('user1', { limit: 5 });
@@ -163,7 +227,11 @@ describe('Deployment History', () => {
 
   describe('getDeploymentById', () => {
     it('should return specific deployment by ID', () => {
-      const log = logDeployment('user1', { repo: 'owner/repo', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log = logDeployment('user1', {
+        repo: 'owner/repo',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       const retrieved = getDeploymentById('user1', log.id);
 
@@ -176,7 +244,11 @@ describe('Deployment History', () => {
     });
 
     it('should not return deployment from different user', () => {
-      const log = logDeployment('user1', { repo: 'owner/repo', branch: 'main', status: DeploymentStatus.SUCCESS });
+      const log = logDeployment('user1', {
+        repo: 'owner/repo',
+        branch: 'main',
+        status: DeploymentStatus.SUCCESS,
+      });
 
       const retrieved = getDeploymentById('user2', log.id);
 

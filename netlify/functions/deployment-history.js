@@ -151,7 +151,16 @@ function getDeploymentStats(userId, filters = {}) {
 function exportHistoryToCsv(userId, filters = {}) {
   const history = getDeploymentHistory(userId, filters);
 
-  const headers = ['ID', 'Repository', 'Branch', 'Status', 'SHA', 'Triggered At', 'Completed At', 'Error'];
+  const headers = [
+    'ID',
+    'Repository',
+    'Branch',
+    'Status',
+    'SHA',
+    'Triggered At',
+    'Completed At',
+    'Error',
+  ];
   const rows = history.map((h) => [
     h.id,
     h.repo,
@@ -163,7 +172,9 @@ function exportHistoryToCsv(userId, filters = {}) {
     h.errorMessage || '',
   ]);
 
-  const csvContent = [headers.join(','), ...rows.map((r) => r.map((c) => `"${c}"`).join(','))].join('\n');
+  const csvContent = [headers.join(','), ...rows.map((r) => r.map((c) => `"${c}"`).join(','))].join(
+    '\n'
+  );
 
   return csvContent;
 }

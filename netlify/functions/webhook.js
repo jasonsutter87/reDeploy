@@ -9,7 +9,7 @@
 const crypto = require('crypto');
 const { triggerBatchDeployment } = require('./deployment-trigger');
 const { getRepoConfigs } = require('./repo-management');
-const { getGroupById, getGroups } = require('./deployment-groups');
+const { getGroupById } = require('./deployment-groups');
 const { logDeployment, DeploymentStatus } = require('./deployment-history');
 
 // In-memory webhook storage (replace with database in production)
@@ -67,7 +67,7 @@ function createWebhook(userId, data) {
  * Get webhook by token (for validation)
  */
 function getWebhookByToken(token) {
-  for (const [_userId, webhooks] of webhookStore.entries()) {
+  for (const [, webhooks] of webhookStore.entries()) {
     const webhook = webhooks.find((w) => w.token === token && w.isActive);
     if (webhook) {
       return webhook;
@@ -121,9 +121,7 @@ exports.handler = async (event, _context) => {
 
   // Webhook trigger: POST /api/webhook/trigger
   if (event.httpMethod === 'POST' && lastPart === 'trigger') {
-    const token =
-      event.headers['x-webhook-token'] ||
-      event.queryStringParameters?.token;
+    const token = event.headers['x-webhook-token'] || event.queryStringParameters?.token;
 
     if (!token) {
       return {

@@ -39,12 +39,8 @@ describe('Deployment Groups', () => {
     });
 
     it('should require a name', () => {
-      expect(() =>
-        createGroup('user1', { description: 'Test' })
-      ).toThrow(GroupError);
-      expect(() =>
-        createGroup('user1', { description: 'Test' })
-      ).toThrow('Group name is required');
+      expect(() => createGroup('user1', { description: 'Test' })).toThrow(GroupError);
+      expect(() => createGroup('user1', { description: 'Test' })).toThrow('Group name is required');
     });
 
     it('should allow empty repoIds initially', () => {
@@ -55,9 +51,9 @@ describe('Deployment Groups', () => {
     it('should prevent duplicate group names for same user', () => {
       createGroup('user1', { name: 'Production' });
 
-      expect(() =>
-        createGroup('user1', { name: 'Production' })
-      ).toThrow('Group with this name already exists');
+      expect(() => createGroup('user1', { name: 'Production' })).toThrow(
+        'Group with this name already exists'
+      );
     });
 
     it('should allow same group name for different users', () => {
@@ -124,18 +120,16 @@ describe('Deployment Groups', () => {
     });
 
     it('should throw error for non-existent group', () => {
-      expect(() =>
-        updateGroup('user1', 'nonexistent', { name: 'New' })
-      ).toThrow('Group not found');
+      expect(() => updateGroup('user1', 'nonexistent', { name: 'New' })).toThrow('Group not found');
     });
 
     it('should prevent duplicate names when updating', () => {
       createGroup('user1', { name: 'Existing' });
       const created = createGroup('user1', { name: 'Other' });
 
-      expect(() =>
-        updateGroup('user1', created.id, { name: 'Existing' })
-      ).toThrow('Group with this name already exists');
+      expect(() => updateGroup('user1', created.id, { name: 'Existing' })).toThrow(
+        'Group with this name already exists'
+      );
     });
   });
 

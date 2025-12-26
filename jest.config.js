@@ -17,8 +17,8 @@ const config = {
   // Setup files
   setupFilesAfterEnv: [],
 
-  // Ignore patterns
-  testPathIgnorePatterns: ['/node_modules/', '/public/', '/resources/'],
+  // Ignore patterns (e2e tests run separately via Playwright)
+  testPathIgnorePatterns: ['/node_modules/', '/public/', '/resources/', '/tests/e2e/'],
 
   // Verbose output
   verbose: true,

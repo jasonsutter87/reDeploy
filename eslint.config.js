@@ -15,9 +15,9 @@ module.exports = [
   },
   js.configs.recommended,
   prettierConfig,
-  // Node.js files (netlify functions, config files)
+  // Node.js files (netlify functions, config files, unit tests)
   {
-    files: ['netlify/**/*.js', '*.config.js', 'tests/**/*.js'],
+    files: ['netlify/**/*.js', '*.config.js', 'tests/unit/**/*.js', 'tests/integration/**/*.js'],
     plugins: {
       prettier: prettier,
     },
@@ -58,6 +58,40 @@ module.exports = [
     rules: {
       'prettier/prettier': 'error',
       'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-console': 'warn',
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
+      'no-var': 'error',
+      'prefer-const': 'error',
+    },
+  },
+  // E2E test files (Playwright - runs in browser context)
+  {
+    files: ['tests/e2e/**/*.js'],
+    plugins: {
+      prettier: prettier,
+    },
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'commonjs',
+      globals: {
+        // Node.js globals for test setup
+        module: 'readonly',
+        require: 'readonly',
+        process: 'readonly',
+        exports: 'readonly',
+        console: 'readonly',
+        // Browser globals used in page.evaluate()
+        window: 'readonly',
+        document: 'readonly',
+        // Playwright globals
+        test: 'readonly',
+        expect: 'readonly',
+      },
+    },
+    rules: {
+      'prettier/prettier': 'error',
+      'no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
       'no-console': 'warn',
       eqeqeq: ['error', 'always'],
       curly: ['error', 'all'],

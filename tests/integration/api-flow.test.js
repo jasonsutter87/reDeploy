@@ -8,7 +8,8 @@
 // Mock fetch globally
 global.fetch = jest.fn();
 
-const { handler: reposHandler } = require('../../netlify/functions/repos');
+// reposHandler not used directly - only via saved-repos
+// const { handler: reposHandler } = require('../../netlify/functions/repos');
 const { handler: savedReposHandler } = require('../../netlify/functions/saved-repos');
 const { handler: deployHandler } = require('../../netlify/functions/deploy');
 const { handler: historyHandler } = require('../../netlify/functions/history');

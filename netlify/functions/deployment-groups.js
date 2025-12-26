@@ -50,9 +50,7 @@ function createGroup(userId, data) {
   const groups = getUserGroups(userId);
 
   // Check for duplicate name
-  const existing = groups.find(
-    (g) => g.name.toLowerCase() === data.name.toLowerCase()
-  );
+  const existing = groups.find((g) => g.name.toLowerCase() === data.name.toLowerCase());
   if (existing) {
     throw new GroupError('Group with this name already exists', 'DUPLICATE_NAME');
   }
